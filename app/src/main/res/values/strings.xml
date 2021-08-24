@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HelloWorld</string>
+    <string name="tx1_name">安卓开发kotlin</string>
+</resources>
