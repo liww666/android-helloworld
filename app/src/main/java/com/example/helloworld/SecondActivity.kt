@@ -5,7 +5,9 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import androidx.core.content.ContextCompat.startActivity
 
 class SecondActivity : AppCompatActivity() {
 
@@ -14,6 +16,8 @@ class SecondActivity : AppCompatActivity() {
     lateinit var btn2: Button
 
     lateinit var editTextBtn : Button
+
+    lateinit var radioBtn : Button
     val tag:String = "SecondActivity"
 
 
@@ -41,6 +45,51 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intnet)
         }
 
+        radioBtn = findViewById<Button>(R.id.btn_radio)
+        radioBtn.setOnClickListener { v ->
+            var intnet = Intent(this@SecondActivity, RadioButtonActivity::class.java)
+            startActivity(intnet)
+        }
+
+
+    }
+
+    private  fun setListener(){
+        var onclick : Onclick = Onclick()
+        btn_1.setOnClickListener(onclick)
+        btn2.setOnClickListener(onclick)
+        editTextBtn.setOnClickListener(onclick)
+        radioBtn.setOnClickListener(onclick)
+    }
+
+    class Onclick : View.OnClickListener{
+        override fun onClick(p0: View?) {
+            var intnet :Intent= Intent()
+
+                when(p0?.id){
+                    R.id.btn_1->{
+                        intnet.setClass(p0.context, TextViewActivity::class.java)
+//                        startActivity(intnet)
+                    }
+                    R.id.btn_2->{
+                        intnet.setClass(p0.context, ButtonActivity::class.java)
+                    }
+                    R.id.btn_edittext->{
+                        intnet.setClass(p0.context, EditTextActivity::class.java)
+                    }
+                    R.id.btn_radio->{
+                        intnet.setClass(p0.context, RadioButtonActivity::class.java)
+
+                    }
+                    else->{}
+                }
+
+
+
+
+
+
+        }
 
 
     }

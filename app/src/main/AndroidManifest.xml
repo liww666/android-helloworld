@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.helloworld">
-<!--    android:theme="@style/Theme.HelloWorld"-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
+        <activity
+            android:name=".RadioButtonActivity"
+            android:exported="true" />
         <activity
             android:name=".EditTextActivity"
             android:exported="true" />
@@ -36,8 +39,7 @@
         <!-- </activity> -->
         <activity
             android:name=".SecondActivity"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
