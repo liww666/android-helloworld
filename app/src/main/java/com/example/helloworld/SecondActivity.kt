@@ -18,6 +18,9 @@ class SecondActivity : AppCompatActivity() {
     lateinit var editTextBtn : Button
 
     lateinit var radioBtn : Button
+
+    lateinit var checkBox :Button
+
     val tag:String = "SecondActivity"
 
 
@@ -48,6 +51,12 @@ class SecondActivity : AppCompatActivity() {
         radioBtn = findViewById<Button>(R.id.btn_radio)
         radioBtn.setOnClickListener { v ->
             var intnet = Intent(this@SecondActivity, RadioButtonActivity::class.java)
+            startActivity(intnet)
+        }
+
+        checkBox = findViewById(R.id.btn_checkbox)
+        checkBox.setOnClickListener { v ->
+            var intnet = Intent(this@SecondActivity, CheckBoxActivity::class.java)
             startActivity(intnet)
         }
 
