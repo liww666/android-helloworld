@@ -15,18 +15,20 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var btn2: Button
 
-    lateinit var editTextBtn : Button
+    lateinit var editTextBtn: Button
 
-    lateinit var radioBtn : Button
+    lateinit var radioBtn: Button
 
-    lateinit var checkBox :Button
+    lateinit var checkBox: Button
 
-    val tag:String = "SecondActivity"
+    lateinit var imageViewBtn: Button
+
+    val tag: String = "SecondActivity"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i(tag,"on create")
+        Log.i(tag, "on create")
         setContentView(R.layout.activity_second)
         btn_1 = findViewById<Button>(R.id.btn_1)
         btn_1.setOnClickListener { v ->
@@ -55,47 +57,51 @@ class SecondActivity : AppCompatActivity() {
         }
 
         checkBox = findViewById(R.id.btn_checkbox)
-        checkBox.setOnClickListener { v ->
+        checkBox.setOnClickListener {
             var intnet = Intent(this@SecondActivity, CheckBoxActivity::class.java)
             startActivity(intnet)
+        }
+
+        imageViewBtn = findViewById(R.id.btn_imageview)
+        imageViewBtn.setOnClickListener {v->
+            Log.d("ddd",v.toString())
+            var intent = Intent(this@SecondActivity, ImageViewActivity::class.java)
+            startActivity(intent)
         }
 
 
     }
 
-    private  fun setListener(){
-        var onclick : Onclick = Onclick()
+    private fun setListener() {
+        var onclick: Onclick = Onclick()
         btn_1.setOnClickListener(onclick)
         btn2.setOnClickListener(onclick)
         editTextBtn.setOnClickListener(onclick)
         radioBtn.setOnClickListener(onclick)
     }
 
-    class Onclick : View.OnClickListener{
+    class Onclick : View.OnClickListener {
         override fun onClick(p0: View?) {
-            var intnet :Intent= Intent()
+            var intnet: Intent = Intent()
 
-                when(p0?.id){
-                    R.id.btn_1->{
-                        intnet.setClass(p0.context, TextViewActivity::class.java)
+            when (p0?.id) {
+                R.id.btn_1 -> {
+                    intnet.setClass(p0.context, TextViewActivity::class.java)
 //                        startActivity(intnet)
-                    }
-                    R.id.btn_2->{
-                        intnet.setClass(p0.context, ButtonActivity::class.java)
-                    }
-                    R.id.btn_edittext->{
-                        intnet.setClass(p0.context, EditTextActivity::class.java)
-                    }
-                    R.id.btn_radio->{
-                        intnet.setClass(p0.context, RadioButtonActivity::class.java)
-
-                    }
-                    else->{}
                 }
+                R.id.btn_2 -> {
+                    intnet.setClass(p0.context, ButtonActivity::class.java)
+                }
+                R.id.btn_edittext -> {
+                    intnet.setClass(p0.context, EditTextActivity::class.java)
+                }
+                R.id.btn_radio -> {
+                    intnet.setClass(p0.context, RadioButtonActivity::class.java)
 
-
-
-
+                }
+                else -> {
+                }
+            }
 
 
         }
@@ -105,26 +111,26 @@ class SecondActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.i(tag,"on start")
+        Log.i(tag, "on start")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i(tag,"on resume")
+        Log.i(tag, "on resume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.i(tag,"on pause")
+        Log.i(tag, "on pause")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.i(tag,"on stop")
+        Log.i(tag, "on stop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i(tag,"on destroy")
+        Log.i(tag, "on destroy")
     }
 }
