@@ -23,6 +23,8 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var imageViewBtn: Button
 
+    lateinit var mapBtn : Button
+
     val tag: String = "SecondActivity"
 
 
@@ -66,6 +68,13 @@ class SecondActivity : AppCompatActivity() {
         imageViewBtn.setOnClickListener {v->
             Log.d("ddd",v.toString())
             var intent = Intent(this@SecondActivity, ImageViewActivity::class.java)
+            startActivity(intent)
+        }
+
+        mapBtn = findViewById(R.id.btn_map)
+        mapBtn.setOnClickListener {v->
+            Log.d("map",v.toString())
+            var intent = Intent(this@SecondActivity, MapActivity::class.java)
             startActivity(intent)
         }
 
