@@ -1,5 +1,8 @@
 package com.example.helloworld
 
+import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +27,8 @@ import android.widget.Toast
 import com.amap.api.maps.model.LatLng
 
 import com.amap.api.maps.CameraUpdateFactory
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,11 +52,13 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
+
         mapView= findViewById(R.id.map) //找到地图控件
 
 //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
 //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
         mapView.onCreate(savedInstanceState)
+        println(sHA1(applicationContext))
         val aMap = mapView.map //初始化地图控制器对象
 
         //设置成中文地图
@@ -64,7 +71,7 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
 //            BitmapDescriptorFactory
 //                .fromResource(R.drawable.local)
 //        ) // 设置小蓝点的图标
-        myLocationStyle.interval(2000)
+//        myLocationStyle.interval(2000)
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE)
 //        myLocationStyle.strokeColor(Color.BLACK) // 设置圆形的边框颜色
 //
@@ -79,7 +86,7 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
 //        aMap.setLocationSource() // 设置定位监听  ,会实现两个方法activate（）、 deactivate（），在两个方法中进行操作
         aMap.isMyLocationEnabled = true
         aMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
-        init()
+//        init()
 
     }
 
@@ -123,6 +130,37 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
 
         //启动定位
         mLocationClient!!.startLocation()
+    }
+
+
+    //获取sha1
+    fun sHA1(context: Context): String? {
+        try {
+            val info = context.packageManager.getPackageInfo(
+                context.packageName, PackageManager.GET_SIGNATURES
+            )
+            val cert = info.signatures[0].toByteArray()
+            val md = MessageDigest.getInstance("SHA1")
+            val publicKey = md.digest(cert)
+            val hexString = StringBuffer()
+            for (i in publicKey.indices) {
+                val appendString = Integer.toHexString(
+                    0xFF and publicKey[i]
+                        .toInt()
+                )
+                    .toUpperCase(Locale.US)
+                if (appendString.length == 1) hexString.append("0")
+                hexString.append(appendString)
+                hexString.append(":")
+            }
+            val result = hexString.toString()
+            return result.substring(0, result.length - 1)
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     override fun onResume() {
