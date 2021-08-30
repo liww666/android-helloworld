@@ -7,7 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import androidx.core.content.ContextCompat.startActivity
+import com.example.helloworld.listview.ListViewActivity
+
 
 class SecondActivity : AppCompatActivity() {
 
@@ -24,6 +25,8 @@ class SecondActivity : AppCompatActivity() {
     lateinit var imageViewBtn: Button
 
     lateinit var mapBtn : Button
+
+    lateinit var listViewBtn :Button
 
     val tag: String = "SecondActivity"
 
@@ -78,6 +81,12 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        listViewBtn = findViewById(R.id.btn_listview)
+        listViewBtn.setOnClickListener(){v->
+            var intent = Intent(this@SecondActivity,ListViewActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

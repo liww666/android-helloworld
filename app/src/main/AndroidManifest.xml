@@ -73,6 +73,10 @@
             android:exported="true" />
         <activity
             android:name=".TextViewActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".listview.ListViewActivity"
             android:exported="true" /> <!-- <activity -->
         <!-- android:name=".MainActivity" -->
         <!-- android:exported="true"> -->
