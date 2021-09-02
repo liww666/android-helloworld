@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/lv_iv"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="#FF9000"
+            android:src="@drawable/zrrtd"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/lv_tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text="标题1"/>
+            <TextView
+                android:id="@+id/lv_tv_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:layout_gravity="fill_vertical"
+                android:text="2021-10-10 20:00:09"/>
+            <TextView
+                android:id="@+id/lv_tv_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text="这里是内容简介这里是内容简介这里是内容简介"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
