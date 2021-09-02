@@ -38,7 +38,7 @@
             android:name=".recyclerview.LinerRecyclerViewActivity"
             android:exported="true" />
         <activity
-            android:name=".recyclerview.RevyclerViewActivity"
+            android:name=".recyclerview.RecylerViewActivity"
             android:exported="true" />
 
         <service android:name="com.amap.api.location.APSService" />

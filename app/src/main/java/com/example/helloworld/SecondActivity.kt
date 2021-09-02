@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.recyclerview.widget.RecyclerView
 import com.example.helloworld.listview.ListViewActivity
+import com.example.helloworld.recyclerview.RecylerViewActivity
 
 
 class SecondActivity : AppCompatActivity() {
@@ -27,6 +29,8 @@ class SecondActivity : AppCompatActivity() {
     lateinit var mapBtn : Button
 
     lateinit var listViewBtn :Button
+
+    lateinit var recyclerViewBtn :Button
 
     val tag: String = "SecondActivity"
 
@@ -85,6 +89,13 @@ class SecondActivity : AppCompatActivity() {
         listViewBtn = findViewById(R.id.btn_listview)
         listViewBtn.setOnClickListener(){v->
             var intent = Intent(this@SecondActivity,ListViewActivity::class.java)
+            startActivity(intent)
+        }
+
+        recyclerViewBtn = findViewById(R.id.btn_recyclerview)
+        recyclerViewBtn.setOnClickListener{
+            v->
+            var intent = Intent(this, RecylerViewActivity::class.java)
             startActivity(intent)
         }
 
