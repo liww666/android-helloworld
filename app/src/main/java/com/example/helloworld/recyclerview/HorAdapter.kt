@@ -13,7 +13,7 @@ import com.example.helloworld.R
 import org.w3c.dom.Text
 
 
-class LinerAdapter(context:Context) : RecyclerView.Adapter<VH>() {
+class HorAdapter(context:Context) : RecyclerView.Adapter<HorVH>() {
 
 //    private var dataList: List<Char>? = null
 
@@ -24,12 +24,12 @@ class LinerAdapter(context:Context) : RecyclerView.Adapter<VH>() {
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(LayoutInflater.from(context).inflate(R.layout.activity_linear_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorVH {
+        return HorVH(LayoutInflater.from(context).inflate(R.layout.activity_linear_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.tv.text= "hello LinearRecyclerView";
+    override fun onBindViewHolder(holder: HorVH, position: Int) {
+        holder.tv.text= "hello HorRecyclerView";
         holder.tv.setOnClickListener{v->
             Toast.makeText(this.context,"click..."+position,Toast.LENGTH_SHORT).show()
         }
@@ -44,7 +44,7 @@ class LinerAdapter(context:Context) : RecyclerView.Adapter<VH>() {
 
 }
 
-class VH(itemView: View) :RecyclerView.ViewHolder(itemView){
+class HorVH(itemView: View) :RecyclerView.ViewHolder(itemView){
 
      var tv: TextView = itemView.findViewById(R.id.tv_title)
 }
