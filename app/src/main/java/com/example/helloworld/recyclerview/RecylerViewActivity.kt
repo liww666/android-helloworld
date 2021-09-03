@@ -11,6 +11,7 @@ class RecylerViewActivity : AppCompatActivity() {
     lateinit var linerBtn: Button
     lateinit var horBtn: Button
     lateinit var gridBtn :Button
+    lateinit var puBtn :Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_revycler_view)
@@ -32,6 +33,14 @@ class RecylerViewActivity : AppCompatActivity() {
         gridBtn.setOnClickListener { v ->
 
             var intent = Intent(this, GridRecyclerViewActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        puBtn = findViewById(R.id.btn_pu_rv)
+        puBtn.setOnClickListener { v ->
+
+            var intent = Intent(this, PuRecyclerViewActivity::class.java)
             startActivity(intent)
 
         }
