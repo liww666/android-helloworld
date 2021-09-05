@@ -26,13 +26,15 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var imageViewBtn: Button
 
-    lateinit var mapBtn : Button
+    lateinit var mapBtn: Button
 
-    lateinit var listViewBtn :Button
+    lateinit var listViewBtn: Button
 
-    lateinit var recyclerViewBtn :Button
+    lateinit var recyclerViewBtn: Button
 
-    lateinit var webViewBtn : Button
+    lateinit var webViewBtn: Button
+
+    lateinit var dialogBtn: Button
 
     val tag: String = "SecondActivity"
 
@@ -74,37 +76,41 @@ class SecondActivity : AppCompatActivity() {
         }
 
         imageViewBtn = findViewById(R.id.btn_imageview)
-        imageViewBtn.setOnClickListener {v->
-            Log.d("ddd",v.toString())
+        imageViewBtn.setOnClickListener { v ->
+            Log.d("ddd", v.toString())
             var intent = Intent(this@SecondActivity, ImageViewActivity::class.java)
             startActivity(intent)
         }
 
         mapBtn = findViewById(R.id.btn_map)
-        mapBtn.setOnClickListener {v->
-            Log.d("map",v.toString())
+        mapBtn.setOnClickListener { v ->
+            Log.d("map", v.toString())
             var intent = Intent(this@SecondActivity, MapActivity::class.java)
             startActivity(intent)
         }
 
 
         listViewBtn = findViewById(R.id.btn_listview)
-        listViewBtn.setOnClickListener(){v->
-            var intent = Intent(this@SecondActivity,ListViewActivity::class.java)
+        listViewBtn.setOnClickListener() { v ->
+            var intent = Intent(this@SecondActivity, ListViewActivity::class.java)
             startActivity(intent)
         }
 
         recyclerViewBtn = findViewById(R.id.btn_recyclerview)
-        recyclerViewBtn.setOnClickListener{
-            v->
+        recyclerViewBtn.setOnClickListener { v ->
             var intent = Intent(this, RecylerViewActivity::class.java)
             startActivity(intent)
         }
 
         webViewBtn = findViewById(R.id.btn_webview)
-        webViewBtn.setOnClickListener{
-                v->
+        webViewBtn.setOnClickListener { v ->
             var intent = Intent(this, WebViewActivity::class.java)
+            startActivity(intent)
+        }
+
+        dialogBtn = findViewById(R.id.btn_dialog)
+        dialogBtn.setOnClickListener { v ->
+            var intent = Intent(this, DialogActivity::class.java)
             startActivity(intent)
         }
     }

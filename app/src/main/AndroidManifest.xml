@@ -35,6 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".DialogActivity"
+            android:exported="true" />
+        <activity
             android:name=".WebViewActivity"
             android:exported="true" />
         <activity
