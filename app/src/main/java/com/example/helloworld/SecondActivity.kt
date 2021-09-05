@@ -32,6 +32,8 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var recyclerViewBtn :Button
 
+    lateinit var webViewBtn : Button
+
     val tag: String = "SecondActivity"
 
 
@@ -99,6 +101,12 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        webViewBtn = findViewById(R.id.btn_webview)
+        webViewBtn.setOnClickListener{
+                v->
+            var intent = Intent(this, WebViewActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setListener() {
