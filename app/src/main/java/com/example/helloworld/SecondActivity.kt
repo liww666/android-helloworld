@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.example.helloworld.fragment.ContainerActivity
+import com.example.helloworld.jump.AActivity
 import com.example.helloworld.listview.ListViewActivity
 import com.example.helloworld.recyclerview.RecylerViewActivity
 
@@ -35,6 +37,10 @@ class SecondActivity : AppCompatActivity() {
     lateinit var webViewBtn: Button
 
     lateinit var dialogBtn: Button
+
+    lateinit var jumpBtn :Button
+
+    lateinit var fgmtBtn : Button
 
     val tag: String = "SecondActivity"
 
@@ -111,6 +117,18 @@ class SecondActivity : AppCompatActivity() {
         dialogBtn = findViewById(R.id.btn_dialog)
         dialogBtn.setOnClickListener { v ->
             var intent = Intent(this, DialogActivity::class.java)
+            startActivity(intent)
+        }
+
+        jumpBtn = findViewById(R.id.btn_jump)
+        jumpBtn.setOnClickListener { v ->
+            var intent = Intent(this, AActivity::class.java)
+            startActivity(intent)
+        }
+
+        fgmtBtn = findViewById(R.id.btn_fgmt)
+        fgmtBtn.setOnClickListener { v ->
+            var intent = Intent(this, ContainerActivity::class.java)
             startActivity(intent)
         }
     }

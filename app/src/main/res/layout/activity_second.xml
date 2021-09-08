@@ -86,6 +86,20 @@
             android:textAllCaps="false"/>
 
         <Button
+            android:id="@+id/btn_fgmt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fragment"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btn_jump"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jump"
+            android:textAllCaps="false"/>
+
+        <Button
             android:id="@+id/btn_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

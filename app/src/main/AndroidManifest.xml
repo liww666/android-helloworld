@@ -35,8 +35,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
-            android:name=".DialogActivity"
+            android:name=".fragment.ContainerActivity"
             android:exported="true" />
+        <activity
+            android:name=".jump.BActivity"
+            android:label="B"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.task2">
+            <intent-filter>
+                <action android:name="com.example.helloworld.jump.BActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".jump.AActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.task1" />
+        <activity
+            android:name=".DialogActivity"
+            android:exported="true"
+            android:label="Test"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".WebViewActivity"
             android:exported="true" />
