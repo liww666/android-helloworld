@@ -2,9 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:gravity="center">
 
     <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:id="@+id/btn_message"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="给activity传递消息"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="更换fragment"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="更换TextView文字内容"
+        android:textAllCaps="false"/>
     <TextView
         android:id="@+id/fgmt_tv"
         android:layout_width="match_parent"

@@ -1,11 +1,16 @@
 package com.example.helloworld.fragment
 
+import android.app.Activity
 import android.app.Fragment
+import android.content.Context
+import android.icu.text.CaseMap
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.example.helloworld.R
 
@@ -19,20 +24,56 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AFragment : Fragment() {
+class AFragment() : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var tv:TextView
+    lateinit var tv: TextView
+    lateinit var mActivity: Activity
+
+    lateinit var changeBtn: Button
+    lateinit var resetBtn: Button
+    lateinit var msgBtn: Button
+    lateinit var bFragment: BFragment
+
+    lateinit var listener: IOnMsgClick
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tv = view.findViewById(R.id.fgmt_tv)
+        tv.setText(arguments.getString("title"))
+
+        changeBtn = view.findViewById(R.id.btn_change)
+        changeBtn.setOnClickListener { v ->
+            bFragment = BFragment()
+
+            var fragment = fragmentManager.findFragmentByTag("a")
+            if (fragment != null) {
+                fragmentManager.beginTransaction().hide(fragment).add(R.id.fl_container, bFragment)
+                    .addToBackStack(null).commitAllowingStateLoss()
+            } else {
+                //直接replace会替换原来fragment的view
+                fragmentManager.beginTransaction().replace(R.id.fl_container, bFragment)
+                    .addToBackStack(null).commitAllowingStateLoss()
+            }
+        }
+        resetBtn = view.findViewById(R.id.btn_reset)
+        resetBtn.setOnClickListener { v ->
+            tv.setText("我是新文字")
+        }
+
+        msgBtn = view.findViewById(R.id.btn_message)
+        msgBtn.setOnClickListener { v ->
+            var containerActivity = activity as ContainerActivity
+            // containerActivity.setData("你好")
+            listener.onClick("aaaaa")
+        }
 
     }
 
@@ -40,8 +81,24 @@ class AFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("AFragment", "-----------onCreateView-------------")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_a, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mActivity = context as Activity
+        listener = context as IOnMsgClick
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //取消异步
     }
 
     companion object {
@@ -62,5 +119,17 @@ class AFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
+        fun newInstance(title: String): AFragment {
+            var aFragment = AFragment()
+            var bundle = Bundle()
+            bundle.putString("title", title)
+            aFragment.arguments = bundle
+            return aFragment
+        }
+    }
+
+    interface IOnMsgClick {
+        fun onClick(text: String)
     }
 }
