@@ -31,6 +31,7 @@ class EventActivity : AppCompatActivity(),View.OnClickListener {
         eventBtn.setOnClickListener(this)
 
         myBtn = findViewById(R.id.btn_my)
+
     }
     class OnClick : View.OnClickListener{
         override fun onClick(v: View?) {

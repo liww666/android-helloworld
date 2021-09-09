@@ -35,6 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".HandlerActivity"
+            android:exported="true" />
+        <activity
             android:name=".EventActivity"
             android:exported="true" />
         <activity

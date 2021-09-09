@@ -23,12 +23,20 @@ class MyButton(context : Context) :AppCompatButton(context) {
      * 基于回调
      */
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        super.onTouchEvent(event)
+
         when(event?.action){
             MotionEvent.ACTION_DOWN->
             { Log.d("MyButton","-----onTouchEvent-----")}
         }
         //return true表示事件不继续传播
-        return false
+        return super.onTouchEvent(event)
+    }
+
+    /**
+     * dispatchTouchEvent->onTouchListener->onTouchEvent
+     */
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        Log.d("MyButton","-----dispatchTouchEvent-----")
+        return super.dispatchTouchEvent(event)
     }
 }

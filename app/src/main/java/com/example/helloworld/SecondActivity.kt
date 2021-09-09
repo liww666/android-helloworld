@@ -44,6 +44,8 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var eventBtn: Button
 
+    lateinit var handlerBtn :Button
+
     val tag: String = "SecondActivity"
 
 
@@ -137,6 +139,12 @@ class SecondActivity : AppCompatActivity() {
         eventBtn = findViewById(R.id.btn_event)
         eventBtn.setOnClickListener { v ->
             var intent = Intent(this, EventActivity::class.java)
+            startActivity(intent)
+        }
+
+        handlerBtn = findViewById(R.id.btn_handler)
+        handlerBtn.setOnClickListener { v ->
+            var intent = Intent(this, HandlerActivity::class.java)
             startActivity(intent)
         }
     }
