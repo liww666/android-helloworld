@@ -38,9 +38,11 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var dialogBtn: Button
 
-    lateinit var jumpBtn :Button
+    lateinit var jumpBtn: Button
 
-    lateinit var fgmtBtn : Button
+    lateinit var fgmtBtn: Button
+
+    lateinit var eventBtn: Button
 
     val tag: String = "SecondActivity"
 
@@ -129,6 +131,12 @@ class SecondActivity : AppCompatActivity() {
         fgmtBtn = findViewById(R.id.btn_fgmt)
         fgmtBtn.setOnClickListener { v ->
             var intent = Intent(this, ContainerActivity::class.java)
+            startActivity(intent)
+        }
+
+        eventBtn = findViewById(R.id.btn_event)
+        eventBtn.setOnClickListener { v ->
+            var intent = Intent(this, EventActivity::class.java)
             startActivity(intent)
         }
     }
