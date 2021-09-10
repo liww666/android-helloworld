@@ -35,6 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".datastorage.FileActivity"
+            android:exported="true" />
+        <activity
             android:name=".datastorage.SharePreActivity"
             android:exported="true" />
         <activity
