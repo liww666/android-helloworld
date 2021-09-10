@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.example.helloworld.datastorage.DataStorageActivity
 import com.example.helloworld.fragment.ContainerActivity
 import com.example.helloworld.jump.AActivity
 import com.example.helloworld.listview.ListViewActivity
@@ -45,6 +46,8 @@ class SecondActivity : AppCompatActivity() {
     lateinit var eventBtn: Button
 
     lateinit var handlerBtn :Button
+
+    lateinit var dataBtn :Button
 
     val tag: String = "SecondActivity"
 
@@ -145,6 +148,12 @@ class SecondActivity : AppCompatActivity() {
         handlerBtn = findViewById(R.id.btn_handler)
         handlerBtn.setOnClickListener { v ->
             var intent = Intent(this, HandlerActivity::class.java)
+            startActivity(intent)
+        }
+
+        dataBtn = findViewById(R.id.btn_data)
+        dataBtn.setOnClickListener { v ->
+            var intent = Intent(this, DataStorageActivity::class.java)
             startActivity(intent)
         }
     }
