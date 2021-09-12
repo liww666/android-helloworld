@@ -35,6 +35,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".map.SearchActivity"
+            android:exported="true" />
+        <activity
+            android:name=".boardcast.Boardcast2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".boardcast.BoardcastActivity"
+            android:exported="true" />
+        <activity
             android:name=".datastorage.FileActivity"
             android:exported="true" />
         <activity
@@ -96,7 +105,7 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name=".MapActivity"
+            android:name=".map.MapActivity"
             android:exported="true" />
 
         <meta-data

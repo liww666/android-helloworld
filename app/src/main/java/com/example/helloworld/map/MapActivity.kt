@@ -1,14 +1,11 @@
-package com.example.helloworld
+package com.example.helloworld.map
 
 import android.content.Context
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
-import android.view.View
 import com.amap.api.location.AMapLocation
 
 import com.amap.api.maps.model.MyLocationStyle
@@ -21,12 +18,14 @@ import com.amap.api.maps.*
 import com.amap.api.maps.model.Marker
 
 import com.amap.api.maps.LocationSource.OnLocationChangedListener
-import com.amap.api.maps.model.BitmapDescriptorFactory
 import android.widget.Toast
+import androidx.core.content.withStyledAttributes
+import androidx.fragment.app.DialogFragment
 
 import com.amap.api.maps.model.LatLng
 
 import com.amap.api.maps.CameraUpdateFactory
+import com.example.helloworld.R
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
@@ -53,6 +52,7 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
         setContentView(R.layout.activity_map)
 
 
+
         mapView= findViewById(R.id.map) //找到地图控件
 
 //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
@@ -72,7 +72,9 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
 //                .fromResource(R.drawable.local)
 //        ) // 设置小蓝点的图标
 //        myLocationStyle.interval(2000)
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE)
+//        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE)//连续定位
+//        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW)//只定位一次
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)//定位一次，且将视角移动到地图中心点
 //        myLocationStyle.strokeColor(Color.BLACK) // 设置圆形的边框颜色
 //
 //        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180)) // 设置圆形的填充颜色
@@ -87,6 +89,8 @@ class MapActivity : AppCompatActivity(), LocationSource, AMapLocationListener{
         aMap.isMyLocationEnabled = true
         aMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
 //        init()
+        var frgmt =SearchFragment()
+        fragmentManager.beginTransaction().add(R.id.fl_search, frgmt,"a").commitAllowingStateLoss()
 
     }
 

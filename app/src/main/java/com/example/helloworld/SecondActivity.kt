@@ -7,11 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import androidx.recyclerview.widget.RecyclerView
+import com.example.helloworld.boardcast.BoardcastActivity
 import com.example.helloworld.datastorage.DataStorageActivity
 import com.example.helloworld.fragment.ContainerActivity
 import com.example.helloworld.jump.AActivity
 import com.example.helloworld.listview.ListViewActivity
+import com.example.helloworld.map.MapActivity
 import com.example.helloworld.recyclerview.RecylerViewActivity
 
 
@@ -48,6 +49,8 @@ class SecondActivity : AppCompatActivity() {
     lateinit var handlerBtn :Button
 
     lateinit var dataBtn :Button
+
+    lateinit var boardcastBtn :Button
 
     val tag: String = "SecondActivity"
 
@@ -154,6 +157,12 @@ class SecondActivity : AppCompatActivity() {
         dataBtn = findViewById(R.id.btn_data)
         dataBtn.setOnClickListener { v ->
             var intent = Intent(this, DataStorageActivity::class.java)
+            startActivity(intent)
+        }
+
+        boardcastBtn = findViewById(R.id.btn_boardcast)
+        boardcastBtn.setOnClickListener {
+            var intent = Intent(this, BoardcastActivity::class.java)
             startActivity(intent)
         }
     }
