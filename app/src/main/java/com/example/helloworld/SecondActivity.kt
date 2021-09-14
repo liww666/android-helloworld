@@ -1,7 +1,9 @@
 package com.example.helloworld
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +16,22 @@ import com.example.helloworld.jump.AActivity
 import com.example.helloworld.listview.ListViewActivity
 import com.example.helloworld.map.MapActivity
 import com.example.helloworld.recyclerview.RecylerViewActivity
+import com.amap.api.navi.AmapNaviPage
+
+import com.amap.api.navi.AmapPageType
+
+import com.amap.api.navi.AmapNaviType
+
+import com.amap.api.navi.AmapNaviParams
+import com.amap.api.maps.model.LatLng
+
+import com.amap.api.maps.model.Poi
+
+
+
+
+
+
 
 
 class SecondActivity : AppCompatActivity() {
@@ -51,6 +69,10 @@ class SecondActivity : AppCompatActivity() {
     lateinit var dataBtn :Button
 
     lateinit var boardcastBtn :Button
+
+    lateinit var navBtn :Button
+
+    lateinit var gaodeBtn:Button
 
     val tag: String = "SecondActivity"
 
@@ -160,6 +182,36 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        navBtn = findViewById(R.id.btn_navigation)
+        navBtn.setOnClickListener{
+            startNavigation()
+
+        }
+
+        gaodeBtn = findViewById(R.id.btn_gaodenav)
+        gaodeBtn.setOnClickListener{
+            //startGaodeNav("39.941823", "116.426319")
+            var dlat="39.941823"
+            var dlon = "116.426319"
+            if(isInstallApp(applicationContext,"com.autonavi.minimap")){
+                var intent = Intent(Intent.ACTION_VIEW)
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.setPackage("com.autonavi.minimap")
+                var url = "androidamap://route?"+"sourceApplication"+applicationContext.getString(R.string.app_name)
+                url+="&dlat="+dlat+"&dlon="+dlon+"&dev="+0+"&t="+0+"&t="+0
+                intent.setData(Uri.parse(url))
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK )
+                applicationContext.startActivity(intent)
+            }else{
+                var url = "https://uri.amap.com/navigation?"
+                url+="&to="+dlon+","+dlat+",终点"+"&mode=car"
+                var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                applicationContext.startActivity(intent)
+            }
+
+        }
+
         boardcastBtn = findViewById(R.id.btn_boardcast)
         boardcastBtn.setOnClickListener {
             var intent = Intent(this, BoardcastActivity::class.java)
@@ -227,5 +279,53 @@ class SecondActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.i(tag, "on destroy")
+        AmapNaviPage.getInstance().exitRouteActivity();
+    }
+
+    fun startNavigation(){
+        //构建导航组件配置类，没有传入起点，所以起点默认为 “我的位置”
+        //构建导航组件配置类，没有传入起点，所以起点默认为 “我的位置”
+        val params = AmapNaviParams(null, null, null, AmapNaviType.DRIVER, AmapPageType.ROUTE)
+//启动导航组件
+//启动导航组件
+        AmapNaviPage.getInstance().showRouteActivity(applicationContext, params, null)
+        //起点
+        //起点
+        val start = Poi("北京首都机场", LatLng(40.080525, 116.603039), "B000A28DAE")
+//途经点
+//途经点
+        val poiList: MutableList<Poi> = ArrayList()
+        poiList.add(Poi("故宫", LatLng(39.918058, 116.397026), "B000A8UIN8"))
+//终点
+//终点
+        val end = Poi("北京大学", LatLng(39.941823, 116.426319), "B000A816R6")
+// 组件参数配置
+// 组件参数配置
+        val params2 = AmapNaviParams(start, poiList, end, AmapNaviType.DRIVER, AmapPageType.ROUTE)
+// 启动组件
+// 启动组件
+        AmapNaviPage.getInstance().showRouteActivity(applicationContext, params2, null)
+    }
+
+    fun startGaodeNav(dlat:String,dlon:String){
+        if(isInstallApp(applicationContext,"com.autonavi.minimap")){
+            var intent = Intent(Intent.ACTION_VIEW)
+            intent.addCategory(Intent.CATEGORY_DEFAULT)
+            intent.setPackage("com.autonavi.minimap")
+            var url = "androidamap://route?"+"sourceApplication"+applicationContext.getString(R.string.app_name)
+            url+="&dlat="+dlat+"&dlon="+dlon+"&dev="+0+"&t="+0+"&t="+0
+            intent.setData(Uri.parse(url))
+            applicationContext.startActivity(intent)
+        }else{
+            var url = "https://uri.amap.com/navigation?"
+            url+="&to="+dlon+","+dlat+",终点"+"&mode=car"
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            applicationContext.startActivity(intent)
+        }
+    }
+
+    fun isInstallApp(context: Context, packageName:String) :Boolean{
+        var packageInfo = context.packageManager.getPackageInfo(packageName,0)
+        return packageInfo!=null
     }
 }

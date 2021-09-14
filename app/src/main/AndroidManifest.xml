@@ -61,6 +61,12 @@
         <activity
             android:name=".fragment.ContainerActivity"
             android:exported="true" />
+
+        <activity
+            android:name="com.amap.api.navi.AmapRouteActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize|navigation" />
+
         <activity
             android:name=".jump.BActivity"
             android:label="B"
