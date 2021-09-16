@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import com.example.helloworld.widget.MyButton
 
 /**
  * 监听三要素：事件源、事件、事件监听器

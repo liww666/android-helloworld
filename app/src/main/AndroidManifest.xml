@@ -35,6 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".RetrofitActivity"
+            android:exported="true" />
+        <activity
             android:name=".map.SearchActivity"
             android:exported="true" />
         <activity
@@ -61,12 +64,10 @@
         <activity
             android:name=".fragment.ContainerActivity"
             android:exported="true" />
-
         <activity
             android:name="com.amap.api.navi.AmapRouteActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize|navigation" />
-
+            android:configChanges="orientation|keyboardHidden|screenSize|navigation"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".jump.BActivity"
             android:label="B"

@@ -13,24 +13,15 @@ import android.widget.Toast
 import com.amap.api.maps.AMap
 import com.example.helloworld.R
 import org.w3c.dom.Text
-import com.amap.api.maps.model.Marker
 
-import com.amap.api.maps.model.BitmapDescriptorFactory
-
-import com.amap.api.maps.model.LatLng
-
-import com.amap.api.maps.model.MarkerOptions
 import com.amap.api.maps.CameraUpdateFactory
 
 import com.amap.api.maps.CameraUpdate
-
-import com.amap.api.maps.model.CameraPosition
-
-
-
-
-
-
+import com.amap.api.maps.model.*
+import com.amap.api.navi.AmapNaviPage
+import com.amap.api.navi.AmapNaviParams
+import com.amap.api.navi.AmapNaviType
+import com.amap.api.navi.AmapPageType
 
 
 class MapDataAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -64,8 +55,10 @@ class MapDataAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewH
             holder.tv.setOnClickListener { v ->
                 Toast.makeText(this.context, "click..." + position, Toast.LENGTH_SHORT).show()
                 doLocate(position)
+                startNavigation(this.context,datas[position])
                 datas = ArrayList();
                 this.notifyDataSetChanged()
+
             }
         } else {
             holder as VH2
@@ -105,6 +98,31 @@ class MapDataAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewH
             .draggable(true)
         val marker: Marker = mAMap.addMarker(markerOptions)
         marker.showInfoWindow()
+    }
+
+    fun startNavigation(applicationContext:Context,loaction:PositionEntity){
+        //构建导航组件配置类，没有传入起点，所以起点默认为 “我的位置”
+        //构建导航组件配置类，没有传入起点，所以起点默认为 “我的位置”
+        val params = AmapNaviParams(null, null, null, AmapNaviType.DRIVER, AmapPageType.ROUTE)
+//启动导航组件
+//启动导航组件
+        AmapNaviPage.getInstance().showRouteActivity(applicationContext, params, null)
+        //起点
+        //起点
+//        val start = Poi("北京首都机场", LatLng(40.080525, 116.603039), "B000A28DAE")
+//途经点
+//途经点
+        val poiList: MutableList<Poi> = ArrayList()
+//        poiList.add(Poi("故宫", LatLng(39.918058, 116.397026), "B000A8UIN8"))
+//终点
+//终点
+        val end = Poi(loaction.address, LatLng(loaction.latitue, loaction.longitude),null)
+// 组件参数配置
+// 组件参数配置
+        val params2 = AmapNaviParams(null, poiList, end, AmapNaviType.DRIVER, AmapPageType.ROUTE)
+// 启动组件
+// 启动组件
+        AmapNaviPage.getInstance().showRouteActivity(applicationContext, params2, null)
     }
 }
 

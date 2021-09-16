@@ -1,4 +1,4 @@
-package com.example.helloworld.widget
+package com.example.helloworld.widgets
 
 import android.content.Context
 import android.util.AttributeSet

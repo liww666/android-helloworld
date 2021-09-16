@@ -74,6 +74,8 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var gaodeBtn:Button
 
+    lateinit var retBtn:Button
+
     val tag: String = "SecondActivity"
 
 
@@ -215,6 +217,12 @@ class SecondActivity : AppCompatActivity() {
         boardcastBtn = findViewById(R.id.btn_boardcast)
         boardcastBtn.setOnClickListener {
             var intent = Intent(this, BoardcastActivity::class.java)
+            startActivity(intent)
+        }
+
+        retBtn = findViewById(R.id.btn_retrofit)
+        retBtn.setOnClickListener{
+            var intent = Intent(this,RetrofitActivity::class.java)
             startActivity(intent)
         }
     }
