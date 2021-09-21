@@ -35,6 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
+            android:name=".MQActivity"
+            android:exported="true" />
+        <activity
             android:name=".RetrofitActivity"
             android:exported="true" />
         <activity

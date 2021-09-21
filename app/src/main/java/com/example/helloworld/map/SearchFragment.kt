@@ -3,6 +3,7 @@ package com.example.helloworld.map
 import android.os.Bundle
 import android.app.Fragment
 import android.os.Build
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
 import com.example.helloworld.R
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Log.e
 import android.widget.EditText
@@ -19,11 +21,17 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amap.api.services.help.Inputtips
+import com.amap.api.services.help.Tip
 import com.example.helloworld.recyclerview.LinerAdapter
 import com.example.helloworld.recyclerview.MyDecoration
 import java.util.*
 import java.util.logging.Logger
 import kotlin.collections.ArrayList as ArrayList1
+import com.amap.api.services.help.InputtipsQuery
+
+
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,7 +44,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SearchFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SearchFragment : Fragment(), PoiSearch.OnPoiSearchListener {
+class SearchFragment : Fragment(), PoiSearch.OnPoiSearchListener, Inputtips.InputtipsListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -76,6 +84,27 @@ class SearchFragment : Fragment(), PoiSearch.OnPoiSearchListener {
         rv.adapter= mapDataAdapter
         var activity =  activity as MapActivity
         mapDataAdapter.mAMap = activity.mapView.map
+        searchEt.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                return
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                return
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+//                Toast.makeText(getActivity().applicationContext,s,Toast.LENGTH_SHORT).show()
+                val inputquery = InputtipsQuery(s.toString(), null)
+                inputquery.cityLimit = true //限制在当前城市
+                val inputTips = Inputtips(getActivity().applicationContext, inputquery)
+                inputTips.setInputtipsListener(this@SearchFragment)
+                inputTips.requestInputtipsAsyn()
+            }
+
+        })
+
+
         searchButton.setOnClickListener{
 //            var query = PoiSearch.Query("朗坤", "", "0551")
 //keyWord表示搜索字符串，
@@ -159,5 +188,11 @@ class SearchFragment : Fragment(), PoiSearch.OnPoiSearchListener {
             poiSearch.setOnPoiSearchListener(this)
             poiSearch.searchPOIAsyn()
         }
+    }
+
+    override fun onGetInputtips(p0: MutableList<Tip>?, p1: Int) {
+        Log.d("amap",p0.toString())
+        Log.d("amap",p1.toString())
+
     }
 }

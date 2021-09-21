@@ -76,6 +76,8 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var retBtn:Button
 
+    lateinit var mqBtn:Button
+
     val tag: String = "SecondActivity"
 
 
@@ -223,6 +225,12 @@ class SecondActivity : AppCompatActivity() {
         retBtn = findViewById(R.id.btn_retrofit)
         retBtn.setOnClickListener{
             var intent = Intent(this,RetrofitActivity::class.java)
+            startActivity(intent)
+        }
+
+        mqBtn = findViewById(R.id.btn_mq)
+        mqBtn.setOnClickListener{
+            var intent = Intent(this,MQActivity::class.java)
             startActivity(intent)
         }
     }
