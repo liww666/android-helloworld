@@ -18,6 +18,8 @@ import java.lang.Exception
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 class MQActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class MQActivity : AppCompatActivity() {
     lateinit var connection: Connection
     lateinit var publishBtn:Button
     lateinit var msgEt:EditText
+    lateinit var threadPool:ExecutorService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mqactivity)
@@ -56,9 +59,11 @@ class MQActivity : AppCompatActivity() {
         }
         //开启消费者线程
         //开启消费者线程
+        threadPool = Executors.newFixedThreadPool(2)
         subscribe(incomingMessageHandler)
         publishBtn = findViewById(R.id.btn_publish)
         msgEt= findViewById(R.id.et_msg)
+
         publishBtn.setOnClickListener{
           publish(msgEt.text.toString())
         }
@@ -66,7 +71,7 @@ class MQActivity : AppCompatActivity() {
     }
 
     fun subscribe(handler: Handler) {
-        subscribeThread = Thread {
+        threadPool.execute {
             //                while (true) {
             try {
                 //使用之前的设置，建立连接
@@ -135,24 +140,22 @@ class MQActivity : AppCompatActivity() {
             Log.i("1111111111111111111111", "run: ")
             //                }
         }
-        subscribeThread!!.start()
     }
 
     fun publish(msg:String){
-        var publishThread = Thread{
-            if(msg==null|| msg.trim().isEmpty()){
+        threadPool.execute {
+            if (msg == null || msg.trim().isEmpty()) {
                 Looper.prepare()
-                Toast.makeText(this,"请输入发送内容",Toast.LENGTH_SHORT).show()
-                return@Thread
+                Toast.makeText(this, "请输入发送内容", Toast.LENGTH_SHORT).show()
+                return@execute
             }
-            if(connection==null){
+            if (connection == null) {
                 connection = factory!!.newConnection()
             }
             val channel = connection.createChannel()
-            channel.basicPublish(EXCHANGE,"",null,msg.toByteArray(Charset.forName("UTF-8")))
+            channel.basicPublish(EXCHANGE, "", null, msg.toByteArray(Charset.forName("UTF-8")))
             channel.close()
         }
-        publishThread!!.start()
     }
 
     override fun onDestroy() {

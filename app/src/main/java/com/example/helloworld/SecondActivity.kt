@@ -78,6 +78,8 @@ class SecondActivity : AppCompatActivity() {
 
     lateinit var mqBtn:Button
 
+    lateinit var uploadBtn:Button
+
     val tag: String = "SecondActivity"
 
 
@@ -231,6 +233,12 @@ class SecondActivity : AppCompatActivity() {
         mqBtn = findViewById(R.id.btn_mq)
         mqBtn.setOnClickListener{
             var intent = Intent(this,MQActivity::class.java)
+            startActivity(intent)
+        }
+
+        uploadBtn = findViewById(R.id.btn_upload)
+        uploadBtn.setOnClickListener{
+            var intent=Intent(this,UploadImageActivity::class.java)
             startActivity(intent)
         }
     }

@@ -84,4 +84,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.rabbitmq:amqp-client:5.7.0'
+    implementation 'io.github.lucksiege:pictureselector:v2.7.0-rc03'
 }
